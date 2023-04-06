@@ -107,8 +107,12 @@ class AssetToken {
       owner: json["owner"],
       owners: owners,
       projectMetadata: projectMetadata,
-      lastActivityTime: DateTime.parse(json['lastActivityTime']),
-      lastRefreshedTime: DateTime.parse(json['lastRefreshedTime']),
+      lastActivityTime: json['lastActivityTime'] != null
+          ? DateTime.parse(json['lastActivityTime'])
+          : DateTime(1970),
+      lastRefreshedTime: json['lastRefreshedTime'] != null
+          ? DateTime.parse(json['lastRefreshedTime'])
+          : DateTime(1970),
       swapped: json["swapped"] as bool?,
       ipfsPinned: json["ipfsPinned"] as bool?,
       burned: json["burned"] as bool?,
