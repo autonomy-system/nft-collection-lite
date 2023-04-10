@@ -133,6 +133,7 @@ const String getTokens = r'''
             galleryThumbnailURL
             assetData
             assetURL
+            artworkMetadata
           }
           latest{
             artistID
@@ -153,6 +154,7 @@ const String getTokens = r'''
             galleryThumbnailURL
             assetData
             assetURL
+            artworkMetadata
           }
         }
       }
