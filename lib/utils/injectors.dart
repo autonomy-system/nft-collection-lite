@@ -3,6 +3,7 @@ import 'package:get_it/get_it.dart';
 import 'package:nft_collection_lite/bloc/nft_collection_bloc/nft_collection_bloc.dart';
 import 'package:nft_collection_lite/gateway/indexer_api.dart';
 import 'package:nft_collection_lite/service/asset_token_service.dart';
+import 'package:nft_collection_lite/service/indexer_service.dart';
 
 final injector = GetIt.instance;
 
@@ -19,6 +20,8 @@ class NftCollectionLite {
   static void injectorGateWay(Dio dio, {required String baseUrl}) {
     injector.registerLazySingleton<IndexerApi>(
         () => IndexerApi(dio, baseUrl: baseUrl));
+    injector
+        .registerLazySingleton<IndexerService>(() => IndexerService(baseUrl));
   }
 
   static void injectorBloc() {

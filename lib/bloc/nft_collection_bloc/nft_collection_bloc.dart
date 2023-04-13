@@ -52,7 +52,6 @@ class NftCollectionBloc extends Bloc<NftCollectionEvent, NftCollectionState> {
         final assetTokens = await _assetTokenService.getAssetToken(
           owners: addresses,
           offset: offset,
-          lastUpdatedAt: 0,
         );
 
         final compactedTokens = assetTokens

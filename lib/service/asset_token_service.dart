@@ -1,26 +1,40 @@
-import '/gateway/indexer_api.dart';
+import 'package:nft_collection_lite/graphql/model/get_list_tokens.dart';
+import 'package:nft_collection_lite/service/indexer_service.dart';
+
 import '/model/model.dart';
 import '/utils/injectors.dart';
 
 class AssetTokenService {
-  final _indexerApi = injector.get<IndexerApi>();
   final _config = injector.get<Config>();
+  final _indexerService = injector.get<IndexerService>();
   AssetTokenService();
 
   Future<List<AssetToken>> getAssetToken({
     required List<String> owners,
     required int offset,
-    required int lastUpdatedAt,
+    DateTime? lastUpdatedAt,
   }) async {
-    final owner = owners.join(',');
     final size = _config.maxSize;
-    return _indexerApi.getNftTokensByOwner(owner, offset, size, lastUpdatedAt);
+
+    final request = QueryListTokensRequest(
+      owners: owners,
+      offset: offset,
+      size: size,
+      lastUpdatedAt: lastUpdatedAt,
+    );
+    return _indexerService.getNftTokens(request);
   }
 
   Future<List<AssetToken>> getAssetTokensByIDs({
     required List<String> ids,
   }) async {
-    return _indexerApi.getNftTokens({"ids": ids});
+    final size = _config.maxSize;
+
+    final request = QueryListTokensRequest(
+      ids: ids,
+      size: size,
+    );
+    return _indexerService.getNftTokens(request);
   }
 }
 
