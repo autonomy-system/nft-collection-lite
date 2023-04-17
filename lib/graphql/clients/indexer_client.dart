@@ -1,4 +1,4 @@
-import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:graphql/client.dart';
 
 class IndexerClient {
   IndexerClient(this._baseUrl);
@@ -11,7 +11,7 @@ class IndexerClient {
     final link = authLink.concat(httpLink);
 
     return GraphQLClient(
-      cache: GraphQLCache(),
+      cache: GraphQLCache(dataIdFromObject: (data) => null),
       link: link,
     );
   }
